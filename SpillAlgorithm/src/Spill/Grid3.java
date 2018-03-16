@@ -1,7 +1,5 @@
 package Spill;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayDeque;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,7 +25,7 @@ public class Grid {
      * actual grid
      */
     Cell grid[][];
-  Queue <Integer> q = new PriorityQueue <Integer>();
+  ArrayDeque <Integer> q = new ArrayDeque<Integer>();
   
     /**
      * Returns a new Grid with specified rows and columns of EMPTY cells
@@ -219,7 +217,7 @@ public class Grid {
     public Spill (int centerrow, int centercol, int originalStrength){
     	SpillInCell(centerrow, centercol, originalStrength);
     	while (!q.isEmpty()){
-    		//
+    		grid[row][col] = q.pop();
     		strength = grid[row][col].getValue();
     		SpillInCell (x-1,y-1,strength-1);
     		SpillInCell(x-1,y,strength-1);
