@@ -25,7 +25,7 @@ public class Grid {
      * actual grid
      */
     Cell grid[][];
-  ArrayDeque <Integer> q = new ArrayDeque<Integer>();
+    ArrayDeque <Cell> q = new ArrayDeque<Cell>(); //creating and initializing a queue 
   
     /**
      * Returns a new Grid with specified rows and columns of EMPTY cells
@@ -218,8 +218,9 @@ public class Grid {
     public void Spill (int row, int col, int strength){
     	SpillInCell(row, col, strength);
     	while (!q.isEmpty()){
-    		//grid[row][col] = q.pop();
-    		strength = grid[row][col].getValue();
+    		Cell var = grid[row][col].getValue();
+    		var = q.pop();
+    		grid[row][col].setValue(strength);
     		SpillInCell(row-1,col-1,strength-1);
     		SpillInCell(row-1,col,strength-1);
     		SpillInCell(row-1,col+1,strength-1);
@@ -249,7 +250,7 @@ public class Grid {
     				return;
     			}
     			grid[row][col].setValue(strength);
-    			q.push(grid{row][col]);
+    			q.push(grid[row][col].getValue());
     			
     			/*Spill(row-1,col-1,strength-1);
     			Spill(row-1,col,strength-1);
