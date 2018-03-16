@@ -215,12 +215,14 @@ public class Grid {
      * @return 
      */
     
-    public void Spill (int row, int col, int strength){
-    	SpillInCell(row, col, strength);
+    public void Spill (int centerrow, int centercol, int strength){
+    	SpillInCell(centerrow, centercol, strength);
+    	int row, col;
     	while (!q.isEmpty()){
-    		Cell var = grid[row][col].getValue();
-    		var = q.pop();
-    		grid[row][col].setValue(strength);
+    		Cell var  = q.pop();
+    		row = var.getRow();
+    		col = var.getCol();
+    		strength = var.getValue();
     		SpillInCell(row-1,col-1,strength-1);
     		SpillInCell(row-1,col,strength-1);
     		SpillInCell(row-1,col+1,strength-1);
@@ -234,7 +236,6 @@ public class Grid {
     }
  
     public void SpillInCell (int row, int col, int strength) {
-    	
     			if (strength == 0){
     				return;
     			}
@@ -242,25 +243,17 @@ public class Grid {
     			if (!isCell(row, col)){ //if cell is out of bounds
     				return; 
     			}
-    			if (grid[row][col].isObstacle()){ //if cell is an obstacle
+    			Cell acell = grid[row][col];
+    			if (acell.isObstacle()){ //if cell is an obstacle
     				return;
     			}
     			
-    			if (grid[row][col].getValue() >= strength){
+    			if (acell.getValue() >= strength){
     				return;
     			}
-    			grid[row][col].setValue(strength);
-    			q.push(grid[row][col].getValue());
+    			acell.setValue(strength);
+    			q.add(acell);
     			
-    			/*Spill(row-1,col-1,strength-1);
-    			Spill(row-1,col,strength-1);
-    			Spill(row-1,col+1,strength-1);
-    			Spill(row,col-1,strength-1);
-    			Spill(row,col+1,strength-1);
-    			Spill(row+1,col-1,strength-1);
-    			Spill(row+1,col,strength-1);
-    			Spill(row+1,col+1,strength-1);*/
-    	
         }
     
    
