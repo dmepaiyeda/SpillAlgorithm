@@ -212,21 +212,22 @@ public class Grid {
      * @param row row of cell receiving spill
      * @param col column of cell receiving spill
      * @param strength strength(concentration) of the spill
+     * @return 
      */
     
-    public Spill (int centerrow, int centercol, int originalStrength){
-    	SpillInCell(centerrow, centercol, originalStrength);
+    public void Spill (int row, int col, int strength){
+    	SpillInCell(row, col, strength);
     	while (!q.isEmpty()){
-    		grid[row][col] = q.pop();
+    		//grid[row][col] = q.pop();
     		strength = grid[row][col].getValue();
-    		SpillInCell (x-1,y-1,strength-1);
-    		SpillInCell(x-1,y,strength-1);
-    		SpillInCell (x-1,y+1,strength-1);
-    		SpillInCell (x,y-1,strength-1);
-    		SpillInCell (x,y+1,strength-1);
-    		SpillInCell (x+1,y-1,strength-1);
-    		SpillInCell (x+1,y,strength-1);
-    		SpillInCell (x+1,y+1,strength-1);
+    		SpillInCell(row-1,col-1,strength-1);
+    		SpillInCell(row-1,col,strength-1);
+    		SpillInCell(row-1,col+1,strength-1);
+    		SpillInCell(row,col-1,strength-1);
+    		SpillInCell(row,col+1,strength-1);
+    		SpillInCell(row+1,col-1,strength-1);
+    		SpillInCell(row+1,col,strength-1);
+    		SpillInCell(row+1,col+1,strength-1);
 
     	}
     }
@@ -248,7 +249,7 @@ public class Grid {
     				return;
     			}
     			grid[row][col].setValue(strength);
-    			q.enqueue
+    			q.push(grid{row][col]);
     			
     			/*Spill(row-1,col-1,strength-1);
     			Spill(row-1,col,strength-1);
