@@ -221,14 +221,15 @@ public class Grid {
     			if (!isCell(row, col)){ //if cell is out of bounds
     				return; 
     			}
-    			if (grid[row][col].isObstacle()){ //if cell is an obstacle
+    			Cell acell = grid[row][col];
+    			if (acell.isObstacle()){ //if cell is an obstacle
     				return;
     			}
     			
-    			if (grid[row][col].getValue() >= strength){
+    			if (acell.getValue() >= strength){
     				return;
     			}
-    			grid[row][col].setValue(strength);
+    			acell.setValue(strength);
     			
     			
     			Spill(row-1,col-1,strength-1);
