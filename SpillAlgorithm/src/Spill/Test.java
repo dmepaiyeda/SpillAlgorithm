@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
   * Test program for the Spill algorithms.
   * @author Sophie Quigley
-  * @author PUT YOUR NAMES HERE
+  * @author Deborah Mepaiyeda, Louise Marquez
   * 
   */
 public class Test {
@@ -14,9 +14,12 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         TestSpill1();
-        TestSpill2(in);
+        TestSpill2(in);*/
+        TimeSpills(1,100,1);
+        //TimeSpills(100,1000,10);
+        //TimeSpills(1000,10000,100);
     }
     
     /**
@@ -51,6 +54,23 @@ public class Test {
         surface.Spill(row,col,strength);
         System.out.println(surface);
         
+    }
+    
+    /*
+     * Loop to repeatedly time 1 spill of incrementing strength
+     */
+    private static void TimeSpills(int first, int last, int increment){
+    	for (int n=first; n<=last; n=n+increment){
+    		int x = 2*n-1;
+    		int y = 2*n-1;
+    		Grid surface = new Grid(x,y,0);
+    		long start = System.nanoTime();
+    		surface.Spill(n-1, n-1, n);
+    		long stop = System.nanoTime();
+    		long time = stop - start;
+    		System.out.println(n + "	" + time);
+    	}
+    	
     }
       
 }
